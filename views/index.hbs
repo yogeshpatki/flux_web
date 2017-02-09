@@ -10,11 +10,13 @@
         <h4> Move the wave forms to match them to expected wave form!</h4>
     </div>
     <div class="graphs">
-        <canvas class="wave_first"></canvas>
-        <canvas class="wave_second"></canvas>
-        <canvas class="wave_resultant"></canvas>
+        <div><canvas id="wave_first" height="100px" width="650px"></canvas></div>
+        <div><canvas id="wave_second" height="100px" width="650px"></canvas></div>
+        <div><canvas id="wave_resultant" height="100px" width="650px"></canvas></div>
     </div>
 </body>
-<script src="/public/javascripts/main.js"></script>
-</html>
 
+<script src="/javascripts/jquery.js"></script>
+<script src="/javascripts/plotter.js"></script>
+<script src="/javascripts/main.js"></script>
+</html>

@@ -1,9 +1,16 @@
-var express = require('express');
-var router = express.Router();
+var requires = require('requirejs');
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'KerFlux - Online' });
+requires.config({
+  nodeRequire: require
 });
 
-module.exports = router;
+requires(['express'],
+    function(express) {
+        var router = express.Router();
+        router.get('/', function(req, res, next) {
+            res.render('index', { title: 'KerFlux - Online' });
+        });
+        module.exports = router;
+
+    }
+);
