@@ -8,17 +8,19 @@ $(function(){
     plotResult();
 
     $('.right').click(function(){
-        var array = $(this).parent().data('plot').split(',');
-        array = array.splice(1).concat(array);
+        var array = $(this).parent().data('plot').split(','),
+        shift = array.splice(array.length - 1);
+        array = shift.concat(array);
         $(this).parent().attr('data-plot',array);
-        var canvas = $(this).parent().find('canvas')[0],
-        context = canvas.getContext("2d");
-        //context.save();
-        context.setTransform(1, 0, 0, 1, 0, 0);
-        context.clearRect(0, 0, canvas.width, canvas.height);
-        //context.restore();
-        context.clearRect(0, 0, canvas.width, canvas.height);
-        console.log(array);
+        var canvas = $(this).parent().find('canvas')[0];
+        resetCanvas(canvas);
         init('#'+$(this).parent().find('canvas').attr('id'),array);
-    });
+    }); 
 });
+
+function resetCanvas(canvas){
+    context = canvas.getContext("2d");
+    context.setTransform(1, 0, 0, 1, 0, 0);
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    context.clearRect(0, 0, canvas.width, canvas.height);
+}
