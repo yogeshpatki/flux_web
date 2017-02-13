@@ -8,14 +8,15 @@ $(function(){
     plotResult();
 
     $('.right').click(function(){
-        var array = $(this).parent().data('plot').split(','),
+        var array = $(this).parent().data('plot'),
         shift = array.splice(array.length - 1);
         array = shift.concat(array);
-        $(this).parent().attr('data-plot',array);
+        $(this).parent().data('plot',array);
         var canvas = $(this).parent().find('canvas')[0];
         resetCanvas(canvas);
         init('#'+$(this).parent().find('canvas').attr('id'),array);
-    }); 
+        plotResult();
+    });
 });
 
 function resetCanvas(canvas){
@@ -23,4 +24,15 @@ function resetCanvas(canvas){
     context.setTransform(1, 0, 0, 1, 0, 0);
     context.clearRect(0, 0, canvas.width, canvas.height);
     context.clearRect(0, 0, canvas.width, canvas.height);
+}
+
+function plotResult(){
+    resetCanvas($('#wave_resultant')[0]);
+    var canvasData1 = $('#wave_first').parent().data('plot');
+    var canvasData2 = $('#wave_second').parent().data('plot');
+    var result = [];
+    for(var i=0;i<canvasData1.length; i++) {
+        result.push( (parseInt(canvasData1[i]) + parseInt(canvasData2[i]))/2 );
+    }
+    init("#wave_resultant",result,"black");
 }

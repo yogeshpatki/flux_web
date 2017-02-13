@@ -16,7 +16,7 @@ function init(canvasId,canvasData,color) {
     var margin = 10;
 
     canvas = $(canvasId)[0];
-    $(canvas).parent().attr('data-plot',canvasData);
+    $(canvas).parent().data('plot',canvasData);
     context = canvas.getContext("2d");
 
     yScale = (canvas.height - columnSize - margin) / (Val_max - Val_min);  //unit on Y axis
@@ -40,15 +40,3 @@ function plotData(dataSet) {
     context.stroke();
 }
 
-function plotResult(){
-    var canvasData1 = $('#wave_first').parent().data('plot').split(',');
-
-    var canvasData2 = $('#wave_second').parent().data('plot').split(',');
-
-    var result = [];
-    for(var i=0;i<canvasData1.length; i++) {
-        result.push( (parseInt(canvasData1[i]) + parseInt(canvasData2[i]))/2 );
-    }
-    console.log(result);
-    init("#wave_resultant",result,"black");
-}
