@@ -42,10 +42,8 @@ function plotData(dataSet) {
 
 function plotResult(){
     var canvasData1 = $('#wave_first').parent().data('plot').split(',');
-    console.log(canvasData1);
 
     var canvasData2 = $('#wave_second').parent().data('plot').split(',');
-    console.log(canvasData2);
 
     var result = [];
     for(var i=0;i<canvasData1.length; i++) {
