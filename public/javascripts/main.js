@@ -7,16 +7,8 @@ $(function(){
     init("#wave_second", sample2);
     plotResult();
 
-    $('.right').click(function(){
-        var array = $(this).parent().data('plot'),
-        shift = array.splice(array.length - 1);
-        array = shift.concat(array);
-        $(this).parent().data('plot',array);
-        var canvas = $(this).parent().find('canvas')[0];
-        resetCanvas(canvas);
-        init('#'+$(this).parent().find('canvas').attr('id'),array);
-        plotResult();
-    });
+    $('.right').click(shiftRight);
+    $('.left').click(shiftLeft);
 });
 
 function resetCanvas(canvas){
@@ -35,4 +27,25 @@ function plotResult(){
         result.push( (parseInt(canvasData1[i]) + parseInt(canvasData2[i]))/2 );
     }
     init("#wave_resultant",result,"black");
+}
+
+function shiftRight(){
+    var array = $(this).parent().data('plot'),
+        shift = array.splice(array.length - 1);
+    array = shift.concat(array);
+    $(this).parent().data('plot',array);
+    var canvas = $(this).parent().find('canvas')[0];
+    resetCanvas(canvas);
+    init('#'+$(this).parent().find('canvas').attr('id'),array);
+    plotResult();
+}
+function shiftLeft(){
+    var array = $(this).parent().data('plot'),
+        shift = array.splice(1);
+    array = shift.concat(array);
+    $(this).parent().data('plot',array);
+    var canvas = $(this).parent().find('canvas')[0];
+    resetCanvas(canvas);
+    init('#'+$(this).parent().find('canvas').attr('id'),array);
+    plotResult();
 }
