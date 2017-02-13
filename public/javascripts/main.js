@@ -6,9 +6,7 @@ $(function(){
     init("#wave_first", sample1);
     init("#wave_second", sample2);
     plotResult();
-
-    $('.right').click(shiftRight);
-    $('.left').click(shiftLeft);
+    $('button').click(shift);
 });
 
 function resetCanvas(canvas){
@@ -29,23 +27,20 @@ function plotResult(){
     init("#wave_resultant",result,"black");
 }
 
-function shiftRight(){
+function shift(){
+
     var array = $(this).parent().data('plot'),
-        shift = array.splice(array.length - 1);
-    array = shift.concat(array);
-    $(this).parent().data('plot',array);
+        shiftDirection = $(this).attr('id');
+        shiftedData = shiftWaveDataNPlaces(array,shiftDirection == "left" ? 1 : -1);
+    $(this).parent().data('plot',shiftedData);
     var canvas = $(this).parent().find('canvas')[0];
     resetCanvas(canvas);
-    init('#'+$(this).parent().find('canvas').attr('id'),array);
+    init('#'+$(this).parent().find('canvas').attr('id'),shiftedData);
     plotResult();
 }
-function shiftLeft(){
-    var array = $(this).parent().data('plot'),
-        shift = array.splice(1);
-    array = shift.concat(array);
-    $(this).parent().data('plot',array);
-    var canvas = $(this).parent().find('canvas')[0];
-    resetCanvas(canvas);
-    init('#'+$(this).parent().find('canvas').attr('id'),array);
-    plotResult();
+
+//Shifts the array of wave data towards Left by n places
+function shiftWaveDataNPlaces(waveData,n){
+    waveData = waveData.splice(n).concat(waveData);
+    return waveData;
 }
