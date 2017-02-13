@@ -16,7 +16,7 @@ function init(canvasId,canvasData,color) {
     var margin = 10;
 
     canvas = $(canvasId)[0];
-    $(canvas).parent().data('plot',canvasData);
+    $(canvas).parent().data('plot',canvasData[0]);
     context = canvas.getContext("2d");
 
     yScale = (canvas.height - columnSize - margin) / (Val_max - Val_min);  //unit on Y axis
@@ -26,10 +26,12 @@ function init(canvasId,canvasData,color) {
     context.scale(1,-1 * yScale);
 
     // Color of each dataplot items
-
-    context.strokeStyle= color == undefined ? "#FF0066" : color ;
-    plotData(canvasData);
+    for(var i = 0; i < canvasData.length; i++) {
+        context.strokeStyle = color != undefined && color[i] != undefined ?  color[i] : "#FF0066" ;
+        plotData(canvasData[i]);
+    }
 }
+
 
 function plotData(dataSet) {
     context.beginPath();
