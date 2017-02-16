@@ -8,7 +8,7 @@ var yScale;
 
 function init(canvasId,canvasData,color) {
     // set these values for your data
-    sections = 32;
+    sections = 250;
     Val_max = 100;
     Val_min = 0;
     var columnSize = 10;
@@ -40,5 +40,29 @@ function plotData(dataSet) {
         context.lineTo(i * xScale, dataSet[i]);
     }
     context.stroke();
+}
+
+function resetCanvas(canvas){
+    context = canvas.getContext("2d");
+    context.setTransform(1, 0, 0, 1, 0, 0);
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    context.clearRect(0, 0, canvas.width, canvas.height);
+}
+
+function plotResult(){
+    resetCanvas($('#wave_resultant')[0]);
+    var canvasData1 = $('#wave_first').parent().data('plot');
+    var canvasData2 = $('#wave_second').parent().data('plot');
+    var addition = [];
+    var gameResult = true;
+    for(var i=0;i<canvasData1.length; i++) {
+        var currentElement = (parseInt(canvasData1[i]) + parseInt(canvasData2[i]))/2;
+        addition.push(currentElement);
+        gameResult = gameResult && currentElement == expectedResult[i];
+    }
+    init("#wave_resultant",[addition,expectedResult],["black","cyan"]);
+    if(gameResult){
+        alert("You win!")
+    }
 }
 
