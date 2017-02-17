@@ -1,3 +1,5 @@
+var SAMPLES_IN_A_WAVE = 250;
+
 function getImpulse(width){
     var impulse = [];
     for(var i=0; i<width;i++){
@@ -6,8 +8,18 @@ function getImpulse(width){
     return impulse;
 }
 
-function periodicWave(period,wave){
-
+function periodicWave(period, waveType, shift){
+    var periodicWave = [];
+    if(waveType == "square"){
+        for(var sample=0; sample<SAMPLES_IN_A_WAVE; sample=sample+period) {
+            var b = [];
+            for (var i = 0; i < period; i++) {
+                b.push(i < (period / 2) ? 100 : 0);
+            }
+            periodicWave =periodicWave.concat(b);
+        }
+    }
+    return shiftWaveDataNPlaces(periodicWave,shift);
 }
 
 function generateExpectedResult(samples) {
