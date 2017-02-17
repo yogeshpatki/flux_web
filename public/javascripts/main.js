@@ -1,6 +1,6 @@
 // Values for the Data Plot, they can also be obtained from a external file
 //1x250 data sets.generally periodic wave forms need to be generated.
-var sample1 =  getPeriodicWave(10,"square", 2);
+var sample1 =  getSineWave(50,"square", 2);
 var sample2 =  getPeriodicWave(50,"square", 8);
 
 

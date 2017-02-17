@@ -56,10 +56,10 @@ function plotResult(){
     var addition = [];
     var gameResult = true;
     for(var i=0;i<canvasData1.length; i++) {
-        var currentElement = (parseInt(canvasData1[i]) + parseInt(canvasData2[i]))/2;
+        var currentElement = (canvasData1[i] + canvasData2[i])/2;
         addition.push(currentElement);
         gameResult = gameResult && currentElement == expectedResult[i];
-    }
+       }
     init("#wave_resultant",[addition,expectedResult],["black","cyan"]);
     if(gameResult){
         alert("You win!")
