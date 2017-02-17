@@ -1,23 +1,21 @@
 var SAMPLES_IN_A_WAVE = 250;
 
-function getImpulse(width){
-    var impulse = [];
-    for(var i=0; i<width;i++){
-        impulse.push(100);
+function getSquarePeriodicWave(period) {
+    var periodicWave = [];
+    for (var sample = 0; sample < SAMPLES_IN_A_WAVE; sample = sample + period) {
+        var b = [];
+        for (var i = 0; i < period; i++) {
+            b.push(i < (period / 2) ? 100 : 0);
+        }
+        periodicWave = periodicWave.concat(b);
     }
-    return impulse;
+    return periodicWave;
 }
 
-function periodicWave(period, waveType, shift){
-    var periodicWave = [];
+function getPeriodicWave(period, waveType, shift){
+    var periodicWave;
     if(waveType == "square"){
-        for(var sample=0; sample<SAMPLES_IN_A_WAVE; sample=sample+period) {
-            var b = [];
-            for (var i = 0; i < period; i++) {
-                b.push(i < (period / 2) ? 100 : 0);
-            }
-            periodicWave =periodicWave.concat(b);
-        }
+        periodicWave = getSquarePeriodicWave(period);
     }
     return shiftWaveDataNPlaces(periodicWave,shift);
 }
@@ -40,16 +38,6 @@ function generateExpectedResult(samples) {
     return result;
 }
 
-function shift(){
-    var array = $(this).parent().data('plot'),
-        shiftDirection = $(this).attr('id'),
-        shiftedData = shiftWaveDataNPlaces(array,shiftDirection == "left" ? 1 : -1);
-    $(this).parent().data('plot',shiftedData);
-    var canvas = $(this).parent().find('canvas')[0];
-    resetCanvas(canvas);
-    init('#'+$(this).parent().find('canvas').attr('id'),[shiftedData]);
-    plotResult();
-}
 
 //Shifts the array of wave data towards Left by n places
 function shiftWaveDataNPlaces(waveData,n){
