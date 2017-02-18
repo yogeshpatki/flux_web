@@ -9,4 +9,12 @@ canvas {
     height:150px; !important;
 }
 
+.pageLoader {
+    height:200px;
+}
+
+.graphs {
+    display:none;
+}
+
 

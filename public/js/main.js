@@ -4,18 +4,30 @@ var sample1 =  getSineWave(50,"square", 2);
 var sample2 =  getPeriodicWave(50,"square", 8);
 var audio = $('audio')[0];
 audio.playbackRate = 0.5;
-
 var expectedResult = generateExpectedResult([sample1,sample2]);
 
 $(function(){
-    init("#wave_first", [sample1],["#5aecfc"]);
-    bindEventsToCanvas($('#wave_first')[0],shiftByN);
-    init("#wave_second", [sample2],["#ffff00"]);
-    bindEventsToCanvas($('#wave_second')[0],shiftByN);
-    plotResult();
-    $('button').click(shift);
+    if($('audio')[0].readyState != 4) {
+        $(audio).on('loadeddata', dataLoaded);
+    }else{
+        dataLoaded();
+    }
 });
 
+function dataLoaded() {
+    $('audio')[0].play();
+    $('.pageLoader').fadeOut(1500,function(){
+        $('.graphs').fadeIn();
+        init("#wave_first", [sample1], ["#5aecfc"]);
+        bindEventsToCanvas($('#wave_first')[0], shiftByN);
+        init("#wave_second", [sample2], ["#ffff00"]);
+        bindEventsToCanvas($('#wave_second')[0], shiftByN);
+        plotResult();
+        $('button').click(shift);
+    });
+
+
+}
 
 function shift(){
     var array = $(this).closest('.row').find('.canvasContainer').data('plot'),
