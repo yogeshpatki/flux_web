@@ -15,7 +15,7 @@ function generateExpectedResult(samples) {
     var result = [];
     for(var sample in samples){
         if(samples.hasOwnProperty(sample)){
-            var shiftBy = Math.floor(Math.random() * 15) - 3;
+            var shiftBy = -20 + Math.floor(Math.random() * 40);
             shiftInResult = shiftInResult.length == 2 ? [] : shiftInResult;
             shiftInResult.push(shiftBy);
             shiftedSamples.push(shiftWaveDataNPlaces(samples[sample], shiftBy));
