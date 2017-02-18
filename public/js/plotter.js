@@ -57,15 +57,16 @@ function plotResult(){
     var canvasData1 = $('#wave_first').parent().data('plot');
     var canvasData2 = $('#wave_second').parent().data('plot');
     var addition = [];
-    var gameResult = true;
+    var error = 0;
     for(var i=0;i < sections; i++) {
         var currentElement = (canvasData1[i] + canvasData2[i])/2;
         addition.push(currentElement);
-        gameResult = gameResult && currentElement == expectedResult[i];
-       }
+        error += Math.abs(currentElement - expectedResult[i]);
+    }
     init("#wave_resultant",[addition,expectedResult],["white","black"]);
-    if(gameResult){
+    if(error == 0){
         alert("You win!")
     }
+    return error;
 }
 

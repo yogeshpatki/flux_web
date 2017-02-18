@@ -2,7 +2,8 @@
 //1x250 data sets.generally periodic wave forms need to be generated.
 var sample1 =  getSineWave(50,"square", 2);
 var sample2 =  getPeriodicWave(50,"square", 8);
-
+var audio = $('audio')[0];
+audio.playbackRate = 0.5;
 
 var expectedResult = generateExpectedResult([sample1,sample2]);
 
@@ -24,7 +25,13 @@ function shift(){
     var canvas = $(this).parent().find('canvas')[0];
     resetCanvas(canvas);
     init('#'+$(this).parent().find('canvas').attr('id'),[shiftedData]);
-    plotResult();
+    var error = plotResult();
+    if(error > 4000){
+        audio.playbackRate = 0.5;
+    }else{
+        audio.playbackRate = 0.5 + (0.5 * (4000-error))/4000;
+        console.log(0.5 + (0.5 * (4000-error))/4000);
+    }
 }
 
 
@@ -34,5 +41,10 @@ function shiftByN(canvas,n){
     $(canvas).parent().data('plot',shiftedData);
     resetCanvas(canvas);
     init('#'+$(canvas).attr('id'),[shiftedData]);
-    plotResult();
+    var error = plotResult();
+    if(error > 8000){
+        audio.playbackRate = 0.1;
+    }else{
+        audio.playbackRate = 0.1 + (0.9 * (8000-error))/8000;
+    }
 }
