@@ -7,6 +7,8 @@ audio.playbackRate = 0.5;
 var expectedResult = generateExpectedResult([sample1,sample2]);
 
 $(function(){
+    $('audio').attr('src','/audio/Intro.mp3');
+
     if($('audio')[0].readyState != 4) {
         $(audio).on('loadeddata', dataLoaded);
     }else{
