@@ -7,7 +7,6 @@ audio.playbackRate = 0.5;
 var expectedResult = generateExpectedResult([sample1,sample2]);
 
 $(function(){
-    $('audio').attr('src','/audio/Intro.mp3');
     $('.play').click(function(){
         $('.menuContainer').fadeOut(0);
         $('.pageLoader').fadeIn();
