@@ -8,12 +8,13 @@ var yScale;
 
 function init(canvasId,canvasData,color) {
     // set these values for your data
-    sections = 250;
+    sections = canvasData[0].length;
     Val_max = 100;
     Val_min = 0;
     var columnSize = 10;
     var rowSize = 5;
     var margin = 10;
+    var strokeWidth = 2;
 
     canvas = $(canvasId)[0];
     $(canvas).parent().data('plot',canvasData[0]);
@@ -22,12 +23,14 @@ function init(canvasId,canvasData,color) {
     yScale = (canvas.height - columnSize - margin) / (Val_max - Val_min);  //unit on Y axis
     xScale = (canvas.width - rowSize) / sections; //unit on X axis
 
-    context.translate(rowSize,canvas.height + Val_min * yScale);
+    context.translate(rowSize, canvas.height - strokeWidth  + Val_min * yScale);
     context.scale(1,-1 * yScale);
-
+    context.lineWidth = strokeWidth;
     // Color of each dataplot items
     for(var i = 0; i < canvasData.length; i++) {
-        context.strokeStyle = color != undefined && color[i] != undefined ?  color[i] : "#FF0066" ;
+        if(color != undefined && color[i] != undefined) {
+            context.strokeStyle =  color[i];
+        }
         plotData(canvasData[i]);
     }
 }
@@ -55,12 +58,12 @@ function plotResult(){
     var canvasData2 = $('#wave_second').parent().data('plot');
     var addition = [];
     var gameResult = true;
-    for(var i=0;i<canvasData1.length; i++) {
+    for(var i=0;i < sections; i++) {
         var currentElement = (canvasData1[i] + canvasData2[i])/2;
         addition.push(currentElement);
         gameResult = gameResult && currentElement == expectedResult[i];
        }
-    init("#wave_resultant",[addition,expectedResult],["black","cyan"]);
+    init("#wave_resultant",[addition,expectedResult],["white","black"]);
     if(gameResult){
         alert("You win!")
     }

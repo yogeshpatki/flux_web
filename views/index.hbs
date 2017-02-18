@@ -3,22 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <title>{{title}}</title>
+    <link rel='stylesheet' href='/css/materialize.min.css' />
     <link rel='stylesheet' href='/css/style.css' />
 
 </head>
 <body>
-    <div class="header">
-        <h1>Welcome to WebFlux.</h1>
-        <h4> Move the wave forms to match them to expected wave form!</h4>
-    </div>
-    <div class="graphs">
-        <div><canvas id="wave_first" height="100px" width="650px"></canvas><button id="left"><=</button><button id="right">=></button></div>
-        <div><canvas id="wave_second" height="100px" width="650px"></canvas><button id="left"><=</button><button id="right">=></button></div>
-        <div><canvas id="wave_resultant" height="100px" width="650px"></canvas></div>
+    <div class="container">
+        <div class="header">
+            <h3>WebFlux</h3>
+        </div>
+        <div class="graphs">
+            <div class="row"><canvas id="wave_first" height="150px" width="650px"></canvas><button id="left"><=</button><button id="right">=></button></div>
+            <div class="row"><canvas id="wave_second" height="150px" width="650px"></canvas><button id="left"><=</button><button id="right">=></button></div>
+            <div class="row"><canvas id="wave_resultant" height="150px" width="650px"></canvas></div>
+        </div>
     </div>
 </body>
 
 <script src="/js/jquery.js"></script>
+<script src="/js/materialize.min.js"></script>
 <script src="/js/waves.js"></script>
 <script src="/js/plotter.js"></script>
 <script src="/js/draggableCanvas.js"></script>

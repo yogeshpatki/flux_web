@@ -7,9 +7,9 @@ var sample2 =  getPeriodicWave(50,"square", 8);
 var expectedResult = generateExpectedResult([sample1,sample2]);
 
 $(function(){
-    init("#wave_first", [sample1]);
+    init("#wave_first", [sample1],["#5aecfc"]);
     bindEventsToCanvas($('#wave_first')[0],shiftByN);
-    init("#wave_second", [sample2]);
+    init("#wave_second", [sample2],["#ffff00"]);
     bindEventsToCanvas($('#wave_second')[0],shiftByN);
     plotResult();
     $('button').click(shift);
