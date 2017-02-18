@@ -8,12 +8,16 @@ var expectedResult = generateExpectedResult([sample1,sample2]);
 
 $(function(){
     $('audio').attr('src','/audio/Intro.mp3');
+    $('.play').click(function(){
+        $('.menuContainer').fadeOut(0);
+        $('.pageLoader').fadeIn();
+        if($('audio')[0].readyState != 4) {
+            $(audio).on('loadeddata', dataLoaded);
+        }else{
+            dataLoaded();
+        }
+    });
 
-    if($('audio')[0].readyState != 4) {
-        $(audio).on('loadeddata', dataLoaded);
-    }else{
-        dataLoaded();
-    }
 });
 
 function dataLoaded() {
@@ -27,7 +31,6 @@ function dataLoaded() {
         plotResult();
         $('button').click(shift);
     });
-
 
 }
 

@@ -10,11 +10,14 @@ canvas {
 }
 
 .pageLoader {
-    height:200px;
+    display: none;
 }
 
 .graphs {
     display:none;
 }
 
+.menuContainer {
+    height:300px;
+}
 
