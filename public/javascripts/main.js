@@ -8,7 +8,9 @@ var expectedResult = generateExpectedResult([sample1,sample2]);
 
 $(function(){
     init("#wave_first", [sample1]);
+    bindEventsToCanvas($('#wave_first')[0],shiftByN);
     init("#wave_second", [sample2]);
+    bindEventsToCanvas($('#wave_second')[0],shiftByN);
     plotResult();
     $('button').click(shift);
 });
@@ -22,5 +24,15 @@ function shift(){
     var canvas = $(this).parent().find('canvas')[0];
     resetCanvas(canvas);
     init('#'+$(this).parent().find('canvas').attr('id'),[shiftedData]);
+    plotResult();
+}
+
+
+function shiftByN(canvas,n){
+    var array = $(canvas).parent().data('plot'),
+        shiftedData = shiftWaveDataNPlaces(array, n);
+    $(canvas).parent().data('plot',shiftedData);
+    resetCanvas(canvas);
+    init('#'+$(canvas).attr('id'),[shiftedData]);
     plotResult();
 }
