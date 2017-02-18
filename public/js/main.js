@@ -10,7 +10,6 @@ $(function(){
     $('.play').click(function(){
         $('.menuContainer').fadeOut(0);
         $('.pageLoader').fadeIn();
-        alert($('audio')[0].readyState);
         if($('audio')[0].readyState != 4 && $('audio')[0].readyState != 0) {
             $(audio).on('loadeddata', dataLoaded);
         }else{
