@@ -1,35 +1,28 @@
 function bindEventsToCanvas(canvas,drawingMethod) {
-    var canvasOffset = $(canvas).offset();
-    var offsetX = canvasOffset.left;
-    var offsetY = canvasOffset.top;
-    var draggingStartedAt;
-    var isDragging = false;
+    var canvasOffset = $(canvas).offset(),
+        offsetX = canvasOffset.left,
+        draggingStartedAt,
+        isDragging = false;
 
     function handleMouseDown(e) {
-        canMouseX = parseInt(e.clientX - offsetX);
-        canMouseY = parseInt(e.clientY - offsetY);
+        var xCoordinateOfPointerOnCanvas = parseInt(e.clientX - offsetX);
         isDragging = true;
-        draggingStartedAt = canMouseX;
+        draggingStartedAt = xCoordinateOfPointerOnCanvas;
     }
 
-    function handleMouseUp(e) {
-        canMouseX = parseInt(e.clientX - offsetX);
-        canMouseY = parseInt(e.clientY - offsetY);
+    function handleMouseUp() {
         isDragging = false;
     }
 
-    function handleMouseOut(e) {
-        canMouseX = parseInt(e.clientX - offsetX);
-        canMouseY = parseInt(e.clientY - offsetY);
+    function handleMouseOut() {
         isDragging=false;
     }
 
     function handleMouseMove(e) {
-        canMouseX = parseInt(e.clientX - offsetX);
-        canMouseY = parseInt(e.clientY - offsetY);
+        var xCoordinateOfPointerOnCanvas = parseInt(e.clientX - offsetX);
         if (isDragging) {
-            drawingMethod(canvas,draggingStartedAt - canMouseX);
-            draggingStartedAt = canMouseX;
+            drawingMethod(canvas,draggingStartedAt - xCoordinateOfPointerOnCanvas);
+            draggingStartedAt = xCoordinateOfPointerOnCanvas;
         }
 
     }
