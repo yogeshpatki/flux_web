@@ -11,7 +11,7 @@ $(function(){
     $('.play').click(function(){
         $('.menuContainer').fadeOut(0);
         $('.pageLoader').fadeIn();
-        alert($('audio')[0].readyState != 4);
+        alert($('audio')[0].readyState);
         if($('audio')[0].readyState != 4) {
             $(audio).on('loadeddata', dataLoaded);
         }else{
