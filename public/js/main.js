@@ -18,13 +18,13 @@ $(function(){
 
 
 function shift(){
-    var array = $(this).parent().data('plot'),
+    var array = $(this).closest('.row').find('.canvasContainer').data('plot'),
         shiftDirection = $(this).attr('id'),
         shiftedData = shiftWaveDataNPlaces(array,shiftDirection == "left" ? 1 : -1);
     $(this).parent().data('plot',shiftedData);
-    var canvas = $(this).parent().find('canvas')[0];
+    var canvas = $(this).closest('.row').find('.canvasContainer').find('canvas')[0];
     resetCanvas(canvas);
-    init('#'+$(this).parent().find('canvas').attr('id'),[shiftedData]);
+    init('#'+$(this).closest('.row').find('.canvasContainer').find('canvas').attr('id'),[shiftedData]);
     var error = plotResult();
     if(error > 4000){
         audio.playbackRate = 0.5;

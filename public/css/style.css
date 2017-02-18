@@ -4,4 +4,8 @@ body {
     color:white;
 }
 
+canvas {
+    height:150px; !important;
+}
+
 
