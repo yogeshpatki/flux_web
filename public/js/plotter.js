@@ -63,7 +63,7 @@ function plotResult(){
         addition.push(currentElement);
         error += Math.abs(currentElement - expectedResult[i]);
     }
-    init("#wave_resultant",[addition,expectedResult],["white","black"]);
+    init("#wave_resultant",[ expectedResult,addition ],["black","white"]);
     if(error == 0){
         alert("You win!")
     }
