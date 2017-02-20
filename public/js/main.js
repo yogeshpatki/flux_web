@@ -33,6 +33,13 @@ function dataLoaded() {
 
 }
 
+function changeAudioBasedOnError(error) {
+    if (error > 8000) {
+        audio.playbackRate = 0.5;
+    } else {
+        audio.playbackRate = 0.5 + (0.5 * (8000 - error)) / 8000;
+    }
+}
 function shift(){
     var array = $(this).closest('.row').find('.canvasContainer').data('plot'),
         shiftDirection = $(this).attr('id'),
@@ -42,12 +49,7 @@ function shift(){
     resetCanvas(canvas);
     init('#'+$(this).closest('.row').find('.canvasContainer').find('canvas').attr('id'),[shiftedData]);
     var error = plotResult();
-    if(error > 4000){
-        audio.playbackRate = 0.5;
-    }else{
-        audio.playbackRate = 0.5 + (0.5 * (4000-error))/4000;
-        console.log(0.5 + (0.5 * (4000-error))/4000);
-    }
+    changeAudioBasedOnError(error);
 }
 
 
@@ -58,9 +60,5 @@ function shiftByN(canvas,n){
     resetCanvas(canvas);
     init('#'+$(canvas).attr('id'),[shiftedData]);
     var error = plotResult();
-    if(error > 8000){
-        audio.playbackRate = 0.1;
-    }else{
-        audio.playbackRate = 0.1 + (0.9 * (8000-error))/8000;
-    }
+    changeAudioBasedOnError(error);
 }
